@@ -1,4 +1,6 @@
+import { FaBell } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+
 
 
 const Navbar = () => {
@@ -14,7 +16,8 @@ const Navbar = () => {
       <li className="mr-2">
         {" "}
         <NavLink
-          className="text-lg "
+          className="text-lg" style={{backgroundColor:"#C6A921",
+        fontSize:"20px",fontWeight:"600",color:"white"}}
           to="/"
         >
           Home
@@ -23,7 +26,9 @@ const Navbar = () => {
       <li className="mr-2">
         {" "}
         <NavLink
-          className="text-lg"
+          className="text-lg" style={{backgroundColor:"#C6A921",
+          fontSize:"20px",fontWeight:"600",color:"white"
+          }}
           to="/"
         >
          MemberShip
@@ -32,18 +37,24 @@ const Navbar = () => {
       <li className="mr-2">
         {" "}
         <NavLink
-          className="text-lg"
+          className="text-lg py-3" style={{backgroundColor:"#C6A921",
+          fontSize:"20px",fontWeight:"600",color:"white"
+          }}
           
           to="/"
         >
-         notification icon
+       <FaBell></FaBell>
+       <div
+           className="text-lg badge badge-secondary">+0</div>
         </NavLink>{" "}
       </li>
       <li className="mr-2">
         {" "}
         <NavLink
           className="text-lg"
-          
+          style={{backgroundColor:"#C6A921",
+          fontSize:"20px",fontWeight:"600",color:"white"
+          }}
           to="/"
         >
          Join Us
@@ -54,9 +65,9 @@ const Navbar = () => {
 
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar  fixed z-10 bg-opacity-20 bg-base-500">
       <div className="navbar-start">
-        <img src="https://i.ibb.co/nnm9gD3/final-Logo.png" className="w-[150px] h-[80px]" alt="" />
+        <img src="https://i.ibb.co/nnm9gD3/final-Logo.png" className="w-[200px] h-[80px] bg-yellow-50 rounded-xl" alt="" />
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
