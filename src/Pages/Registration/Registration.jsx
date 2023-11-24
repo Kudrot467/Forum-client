@@ -2,19 +2,35 @@ import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaMedal } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { useForm } from "react-hook-form";
 
 const Registration = () => {
-  const { createUser, setProfilePicture } = useContext(AuthContext);
+    const { createUser, setProfilePicture } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
   const [showPassword, setShowPassWord] = useState(false);
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const userName = form.userName.value;
-    const image_url = form.image_url.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    const userType="bronze";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+   const onSubmit = (data) => {
+    console.log(data);
+    createUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+        setProfilePicture(data.userName,data.image_url);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setRegisterError(error.message);
+      });
+//     e.preventDefault();
+//     const form = e.target;
+//     const userName = form.userName.value;
+//     const image_url = form.image_url.value;
+//     const email = form.email.value;
+//     const password = form.password.value;
+//     const userType="bronze";
 
     // const user = {
     //   userName,
@@ -22,29 +38,28 @@ const Registration = () => {
     //   email,
     //   password,
     // };
-    if (password.length < 6) {
-      setRegisterError("Password should be at least 6 character");
-      return;
-    } else if (!/[A-Z]/.test(password)) {
-      setRegisterError("Please take a capital letter");
-      return;
-    } else if (
-      !/(?=.*[a-zA-Z >>!#$%&? "<<])[a-zA-Z0-9 >>!#$%&?<< ]/.test(password)
-    ) {
-      setRegisterError("Please take a special character ");
-      return;
-    }
-    setRegisterError("");
-    createUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-        setProfilePicture(userName,image_url);
-        console.log(image_url);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setRegisterError(error.message);
-      });
+    // if (password.length < 6) {
+    //   setRegisterError("Password should be at least 6 character");
+    //   return;
+    // } else if (!/[A-Z]/.test(password)) {
+    //   setRegisterError("Please take a capital letter");
+    //   return;
+    // } else if (
+    //   !/(?=.*[a-zA-Z >>!#$%&? "<<])[a-zA-Z0-9 >>!#$%&?<< ]/.test(password)
+    // ) {
+    //   setRegisterError(" ");
+    //   return;
+    // }
+    // setRegisterError("");
+    // createUser(email, password)
+    //   .then((result) => {
+    //     console.log(result.user);
+    //     setProfilePicture(userName,image_url);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //     setRegisterError(error.message);
+    //   });
   };
   return (
     <div className="py-20">
@@ -54,7 +69,7 @@ const Registration = () => {
             <img src="" alt="" />
           </div>
           <div className="card flex-shrink-0 w-full md:w-3/4 lg:w-1/2 shadow-2xl bg-base-100">
-            <form onSubmit={handleRegister} className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="flex flex-col md:flex-col lg:flex-row gap-1">
               <div className="form-control">
                     
@@ -62,10 +77,10 @@ const Registration = () => {
                 <div className="form-control w-full">
                 <div className=" text-[#C6A921] font-medium text-lg text-center flex">
                <div>
-               <FaMedal></FaMedal>
-                <h3 className="bg-[#C6A921] text-white text-xl font-semibold p-3 rounded-xl mr-3">Bronze</h3>
+                <h3 className="bg-[#C6A921] text-white text-xl font-semibold p-3 rounded-xl mr-3 flex">
+                <FaMedal></FaMedal>Bronze</h3>
                </div>
-                <h1 className=" text-[#C6A921] font-bold text-xl rounded-xl w-full">Registration</h1>
+                <h1 className=" text-[#C6A921] font-bold text-2xl rounded-xl w-full underline">Registration</h1>
                 </div>
                 <label className="label">
                     <span className="label-text text-[#C6A921] font-medium text-lg">
@@ -74,11 +89,12 @@ const Registration = () => {
                   </label>
                   <input
                     type="text"
+                    {...register("userName",{required:true})}
                     placeholder="User Name"
                     name="userName"
                     className="input input-bordered border-[#C6A921]"
-                    required
                   />
+                  {errors.userName && <span className="text-red-700">*User Name is required</span>}
                 </div>
               </div>
               <div>
@@ -90,11 +106,12 @@ const Registration = () => {
                   </label>
                   <input
                     type="text"
+                    {...register("image_url",{required:true})}
                     placeholder="Image url"
                     name="image_url"
                     className="input input-bordered border-[#C6A921]"
-                    required
                   />
+                  {errors.image_url && <span className="text-red-700">*image is required</span>}
                 </div>
 
                 <div className="form-control">
@@ -105,11 +122,12 @@ const Registration = () => {
                   </label>
                   <input
                     type="email"
+                    {...register("email",{required:true})}
                     placeholder="email"
                     name="email"
                     className="input input-bordered border-[#C6A921]"
-                    required
                   />
+                  {errors.email && <span className="text-red-700">*Email is required</span>}
                 </div>
                 <div className="form-control">
                   <label className="label">
@@ -120,11 +138,17 @@ const Registration = () => {
                   <div className="relative">
                     <input
                       type={showPassword ? "text" : "password"}
+                      {...register("password",{required:true,
+                        minLength:6,
+                        pattern:/(?=.*[a-zA-Z >>!#$%&? "<<])[a-zA-Z0-9 >>!#$%&?<< ]/,
+                    })}
                       placeholder="password"
                       name="password"
                       className="input input-bordered w-full border-[#C6A921]"
-                      required
                     />
+                         {errors.password?.type==='required' && <span className="text-red-700">*Password is required</span>}
+                         {errors.password?.type==='pattern' && <span className="text-red-700">*Provie a special Character,one capital letter</span>}
+                         {errors.password?.type==='minLength' && <span className="text-red-700">*Password must be 6 characters</span>}
                     <span
                       className="absolute top-3 right-2"
                       onClick={() => setShowPassWord(!showPassword)}
