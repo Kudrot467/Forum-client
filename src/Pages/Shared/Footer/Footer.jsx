@@ -3,7 +3,7 @@ const Footer = () => {
     <div>
       <footer className="footer p-10 bg-base-300 text-base-content">
         <nav>
-            <h1>Threads Studio</h1>
+            <h1 className="bg-[#C6A921] p-4 text-white font-bold text-xl rounded-xl">Threads Studio</h1>
           <header className="footer-title">Get Started</header>
           <a className="link link-hover">Product</a>
           <a className="link link-hover">Pricing</a>

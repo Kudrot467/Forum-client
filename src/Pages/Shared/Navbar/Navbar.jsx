@@ -55,7 +55,7 @@ const Navbar = () => {
           style={{backgroundColor:"#C6A921",
           fontSize:"20px",fontWeight:"600",color:"white"
           }}
-          to="/"
+          to="/login"
         >
          Join Us
         </NavLink>{" "}
@@ -65,7 +65,7 @@ const Navbar = () => {
 
 
   return (
-    <div className="navbar  fixed z-10 bg-opacity-20 bg-base-500">
+    <div className="navbar  fixed z-10 bg-opacity-20 bg-black">
       <div className="navbar-start">
         <img src="https://i.ibb.co/nnm9gD3/final-Logo.png" className="w-[200px] h-[80px] bg-yellow-50 rounded-xl" alt="" />
         <div className="dropdown">
