@@ -26,10 +26,13 @@ const Login = () => {
           console.log(result.user);
   
           navigate(location?.state ? location.state : "/");
-          Swal.fire(
-            "Login Successful",
-            "success"
-         );
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "login successful",
+            showConfirmButton: false,
+            timer: 1500
+          });
          form.reset();
         })
         .catch((error) => {

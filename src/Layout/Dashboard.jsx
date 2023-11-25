@@ -1,4 +1,4 @@
-import { FaAd, FaList, FaUser } from "react-icons/fa";
+import { FaAd, FaHome, FaList, FaUser } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -9,11 +9,11 @@ const Dashboard = () => {
         <ul className="menu">
           <li >
             <NavLink
-              to="myProfile"
+              to="/dashboard/myProfile"
               style={({isActive})=>{
                 return{
                  backgroundColor: isActive ? "white":"",
-                 fontSize:isActive ? "20px":"24px",
+                 fontSize:isActive ? "20px":"22px",
                  fontWeight: isActive ?"700":"600",
                  color:isActive ? "#C6A921":"white",
                  marginBottom:isActive ?"12px":"12px",
@@ -21,18 +21,18 @@ const Dashboard = () => {
  
                }}
             >
-                <FaUser></FaUser>
+            <FaUser></FaUser>
              My Profile--
             </NavLink>
           </li>
           <hr /><hr />
           <li>
             <NavLink
-              to="addPost"
+              to="/dashboard/addPost"
               style={({isActive})=>{
                 return{
                  backgroundColor: isActive ? "white":"",
-                 fontSize:isActive ? "20px":"24px",
+                 fontSize:isActive ? "20px":"22px",
                  fontWeight: isActive ?"700":"600",
                  color:isActive ? "#C6A921":"white",
                  marginBottom:isActive ?"12px":"12px",
@@ -47,12 +47,12 @@ const Dashboard = () => {
           <hr /><hr />
           <li>
             <NavLink
-              to="myPosts"
+              to="/dashboard/myPosts"
               className=""
               style={({isActive})=>{
                return{
                 backgroundColor: isActive ? "white":"",
-                fontSize:isActive ? "20px":"24px",
+                fontSize:isActive ? "20px":"22px",
                 fontWeight: isActive ?"700":"600",
                 color:isActive ? "#C6A921":"white",
                 marginBottom:isActive ?"12px":"12px",
@@ -62,6 +62,26 @@ const Dashboard = () => {
             >
                 <FaList></FaList>
              My Posts--
+            </NavLink>
+          </li>
+          <hr />
+          <hr />
+          <li>
+            <NavLink
+              to="/"
+              style={({isActive})=>{
+                return{
+                 backgroundColor: isActive ? "white":"",
+                 fontSize:isActive ? "20px":"22px",
+                 fontWeight: isActive ?"700":"600",
+                 color:isActive ? "#C6A921":"white",
+                 marginBottom:isActive ?"12px":"12px",
+                }
+ 
+               }}
+            >
+                <FaHome></FaHome>
+             Home
             </NavLink>
           </li>
         </ul>

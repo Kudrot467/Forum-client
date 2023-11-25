@@ -125,23 +125,6 @@ const Navbar = () => {
                 <li className="text-lg mb-2 bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
                         <Link to="/dashboard">--Dashboard--</Link>
                       </li>
-                <li tabIndex={0}>
-                  <details>
-                    <summary className="text-[#C6A921] font-bold">Dashboard</summary>
-                    <ul className="p-2">
-                      <li className="text-lg mb-2 bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
-                        <Link to="/">--My Profile--</Link>
-                      </li>
-                      <li className="text-lg mb-2 bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
-                        <Link to="/">--Add Post--</Link>
-                      </li>
-                      <li className="text-lg bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
-                        <Link to="/">--My Posts--</Link>
-                      </li>
-                    </ul>
-                  </details>
-                </li>
-
                 <li className="w-full">
                   <button
                     onClick={signOut}

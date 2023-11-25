@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Registration = () => {
   const { createUser, setProfilePicture } = useContext(AuthContext);
@@ -14,6 +15,7 @@ const Registration = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const axiosSecure=useAxiosSecure();
   const onSubmit = (data) => {
     const medal = "Bronze";
     const userName = data.userName;
@@ -29,16 +31,12 @@ const Registration = () => {
       medal,
     };
 
-    fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          Swal.fire("Thank You!", "Now we are friends!", "success");
+    axiosSecure.post("/users",(user))
+    //   .then((response) => response.json())
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire("Thank You!", "Now you got a bronze medal !", "success");
         }
       });
 
@@ -51,42 +49,6 @@ const Registration = () => {
         console.log(error.message);
         setRegisterError(error.message);
       });
-    //     e.preventDefault();
-    //     const form = e.target;
-    //     const userName = form.userName.value;
-    //     const image_url = form.image_url.value;
-    //     const email = form.email.value;
-    //     const password = form.password.value;
-    //     const userType="bronze";
-
-    // const user = {
-    //   userName,
-    //   image_url,
-    //   email,
-    //   password,
-    // };
-    // if (password.length < 6) {
-    //   setRegisterError("Password should be at least 6 character");
-    //   return;
-    // } else if (!/[A-Z]/.test(password)) {
-    //   setRegisterError("Please take a capital letter");
-    //   return;
-    // } else if (
-    //   !/(?=.*[a-zA-Z >>!#$%&? "<<])[a-zA-Z0-9 >>!#$%&?<< ]/.test(password)
-    // ) {
-    //   setRegisterError(" ");
-    //   return;
-    // }
-    // setRegisterError("");
-    // createUser(email, password)
-    //   .then((result) => {
-    //     console.log(result.user);
-    //     setProfilePicture(userName,image_url);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //     setRegisterError(error.message);
-    //   });
   };
   return (
     <div className="py-20">
