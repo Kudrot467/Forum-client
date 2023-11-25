@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FaBell } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Navbar = () => {
@@ -42,19 +42,20 @@ const Navbar = () => {
       </li>
       <li className="mr-2">
         {" "}
-        <NavLink
-          className="text-lg py-3"
+        <div
+          className="indicator py-3"
           style={{
             backgroundColor: "#C6A921",
             fontSize: "20px",
             fontWeight: "600",
             color: "white",
           }}
-          to="/"
         >
-          <FaBell></FaBell>
-          <div className="text-lg badge badge-secondary">+0</div>
-        </NavLink>{" "}
+          <NavLink to="/">
+            <span className="indicator-item badge badge-secondary">0+</span>
+            <FaBell></FaBell>
+          </NavLink>{" "}
+        </div>
       </li>
     </>
   );
@@ -106,7 +107,7 @@ const Navbar = () => {
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   <img
-                    alt="Tailwind CSS Navbar component"
+                    alt=""
                     src={user?.photoURL}
                   />
                 </div>
@@ -121,10 +122,30 @@ const Navbar = () => {
                     <span className="badge indicator-item badge-secondary bg-green-500"></span>
                   </a>
                 </li>
+                <li className="text-lg mb-2 bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
+                        <Link to="/dashboard">--Dashboard--</Link>
+                      </li>
+                <li tabIndex={0}>
+                  <details>
+                    <summary className="text-[#C6A921] font-bold">Dashboard</summary>
+                    <ul className="p-2">
+                      <li className="text-lg mb-2 bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
+                        <Link to="/">--My Profile--</Link>
+                      </li>
+                      <li className="text-lg mb-2 bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
+                        <Link to="/">--Add Post--</Link>
+                      </li>
+                      <li className="text-lg bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
+                        <Link to="/">--My Posts--</Link>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+
                 <li className="w-full">
                   <button
                     onClick={signOut}
-                    className="btn text-lg bg-[#C6A921] hover:bg-[#C6A921] text-white text-center"
+                    className="text-lg bg-[#C6A921] hover:bg-[#C6A921] text-white text-center"
                   >
                     Logout
                   </button>
@@ -134,20 +155,19 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            
-              {" "}
-              <NavLink
-                className="text-lg px-3 py-2 rounded-xl"
-                style={{
-                  backgroundColor: "#C6A921",
-                  fontSize: "20px",
-                  fontWeight: "600",
-                  color: "white",
-                }}
-                to="/login"
-              >
-                Join Us
-              </NavLink>{" "}
+            {" "}
+            <NavLink
+              className="text-lg px-3 py-2 rounded-xl"
+              style={{
+                backgroundColor: "#C6A921",
+                fontSize: "20px",
+                fontWeight: "600",
+                color: "white",
+              }}
+              to="/login"
+            >
+              Join Us
+            </NavLink>{" "}
           </>
         )}
       </div>

@@ -3,9 +3,10 @@ import { FaEye, FaEyeSlash, FaMedal } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Registration = () => {
-    const { createUser, setProfilePicture } = useContext(AuthContext);
+  const { createUser, setProfilePicture } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
   const [showPassword, setShowPassWord] = useState(false);
   const {
@@ -13,24 +14,50 @@ const Registration = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-   const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data) => {
+    const medal = "Bronze";
+    const userName = data.userName;
+    const image_url = data.image_url;
+    const email = data.email;
+    const password = data.password;
+
+    const user = {
+      userName,
+      image_url,
+      email,
+      password,
+      medal,
+    };
+
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire("Thank You!", "Now we are friends!", "success");
+        }
+      });
+
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
-        setProfilePicture(data.userName,data.image_url);
+        setProfilePicture(data.userName, data.image_url);
       })
       .catch((error) => {
         console.log(error.message);
         setRegisterError(error.message);
       });
-//     e.preventDefault();
-//     const form = e.target;
-//     const userName = form.userName.value;
-//     const image_url = form.image_url.value;
-//     const email = form.email.value;
-//     const password = form.password.value;
-//     const userType="bronze";
+    //     e.preventDefault();
+    //     const form = e.target;
+    //     const userName = form.userName.value;
+    //     const image_url = form.image_url.value;
+    //     const email = form.email.value;
+    //     const password = form.password.value;
+    //     const userType="bronze";
 
     // const user = {
     //   userName,
@@ -71,30 +98,33 @@ const Registration = () => {
           <div className="card flex-shrink-0 w-full md:w-3/4 lg:w-1/2 shadow-2xl bg-base-100">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="flex flex-col md:flex-col lg:flex-row gap-1">
-              <div className="form-control">
-                    
-                </div>
+                <div className="form-control"></div>
                 <div className="form-control w-full">
-                <div className=" text-[#C6A921] font-medium text-lg text-center flex">
-               <div>
-                <h3 className="bg-[#C6A921] text-white text-xl font-semibold p-3 rounded-xl mr-3 flex">
-                <FaMedal></FaMedal>Bronze</h3>
-               </div>
-                <h1 className=" text-[#C6A921] font-bold text-2xl rounded-xl w-full underline">Registration</h1>
-                </div>
-                <label className="label">
+                  <div className=" text-[#C6A921] font-medium text-lg text-center flex">
+                    <div>
+                      <h3 className="bg-[#C6A921] text-white text-xl font-semibold p-3 rounded-xl mr-3 flex">
+                        <FaMedal></FaMedal>Bronze
+                      </h3>
+                    </div>
+                    <h1 className=" text-[#C6A921] font-bold text-2xl rounded-xl w-full underline">
+                      Registration
+                    </h1>
+                  </div>
+                  <label className="label">
                     <span className="label-text text-[#C6A921] font-medium text-lg">
                       User Name
                     </span>
                   </label>
                   <input
                     type="text"
-                    {...register("userName",{required:true})}
+                    {...register("userName", { required: true })}
                     placeholder="User Name"
                     name="userName"
                     className="input input-bordered border-[#C6A921]"
                   />
-                  {errors.userName && <span className="text-red-700">*User Name is required</span>}
+                  {errors.userName && (
+                    <span className="text-red-700">*User Name is required</span>
+                  )}
                 </div>
               </div>
               <div>
@@ -106,12 +136,14 @@ const Registration = () => {
                   </label>
                   <input
                     type="text"
-                    {...register("image_url",{required:true})}
+                    {...register("image_url", { required: true })}
                     placeholder="Image url"
                     name="image_url"
                     className="input input-bordered border-[#C6A921]"
                   />
-                  {errors.image_url && <span className="text-red-700">*image is required</span>}
+                  {errors.image_url && (
+                    <span className="text-red-700">*image is required</span>
+                  )}
                 </div>
 
                 <div className="form-control">
@@ -122,12 +154,14 @@ const Registration = () => {
                   </label>
                   <input
                     type="email"
-                    {...register("email",{required:true})}
+                    {...register("email", { required: true })}
                     placeholder="email"
                     name="email"
                     className="input input-bordered border-[#C6A921]"
                   />
-                  {errors.email && <span className="text-red-700">*Email is required</span>}
+                  {errors.email && (
+                    <span className="text-red-700">*Email is required</span>
+                  )}
                 </div>
                 <div className="form-control">
                   <label className="label">
@@ -138,17 +172,31 @@ const Registration = () => {
                   <div className="relative">
                     <input
                       type={showPassword ? "text" : "password"}
-                      {...register("password",{required:true,
-                        minLength:6,
-                        pattern:/(?=.*[a-zA-Z >>!#$%&? "<<])[a-zA-Z0-9 >>!#$%&?<< ]/,
-                    })}
+                      {...register("password", {
+                        required: true,
+                        minLength: 6,
+                        pattern:
+                          /(?=.*[a-zA-Z >>!#$%&? "<<])[a-zA-Z0-9 >>!#$%&?<< ]/,
+                      })}
                       placeholder="password"
                       name="password"
                       className="input input-bordered w-full border-[#C6A921]"
                     />
-                         {errors.password?.type==='required' && <span className="text-red-700">*Password is required</span>}
-                         {errors.password?.type==='pattern' && <span className="text-red-700">*Provie a special Character,one capital letter</span>}
-                         {errors.password?.type==='minLength' && <span className="text-red-700">*Password must be 6 characters</span>}
+                    {errors.password?.type === "required" && (
+                      <span className="text-red-700">
+                        *Password is required
+                      </span>
+                    )}
+                    {errors.password?.type === "pattern" && (
+                      <span className="text-red-700">
+                        *Provie a special Character,one capital letter
+                      </span>
+                    )}
+                    {errors.password?.type === "minLength" && (
+                      <span className="text-red-700">
+                        *Password must be 6 characters
+                      </span>
+                    )}
                     <span
                       className="absolute top-3 right-2"
                       onClick={() => setShowPassWord(!showPassword)}
