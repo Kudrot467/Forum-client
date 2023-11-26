@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Registration = () => {
   const { createUser, setProfilePicture } = useContext(AuthContext);
@@ -15,7 +15,7 @@ const Registration = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const axiosSecure=useAxiosSecure();
+  const axiosPublic=useAxiosPublic();
   const onSubmit = (data) => {
     const medal = "Bronze";
     const userName = data.userName;
@@ -31,7 +31,7 @@ const Registration = () => {
       medal,
     };
 
-    axiosSecure.post("/users",(user))
+    axiosPublic.post("/users",(user))
     //   .then((response) => response.json())
       .then((res) => {
         console.log(res.data);

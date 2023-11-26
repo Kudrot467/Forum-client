@@ -5,44 +5,12 @@ import {
 } from "react-icons/fa";
 import usePosts from "../../../Hooks/usePosts";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const AllPost = () => {
   const [allPost] = usePosts();
-  const [upVotes, setUpVotes] = useState(0);
-  const [downVotes, setDownVotes] = useState(0);
-  const [upVoteActive, setUpVoteActive] = useState(false);
-  const [downVoteActive, setDownVoteActive] = useState(false);
   const reversedPosts = allPost.slice().reverse();
     console.log(reversedPosts);
-  const upVote = () => {
-    if (upVoteActive) {
-      setUpVoteActive(false);
-      setUpVotes(upVotes - 1);
-    } else {
-      setUpVoteActive(true);
-      setUpVotes(upVotes + 1);
-      if (downVoteActive) {
-        setDownVoteActive(true);
-        setUpVotes(upVotes + 1);
-        setDownVotes(downVotes - 1);
-      }
-    }
-  };
-  const downVote=()=>{
-    if(downVoteActive){
-        setDownVoteActive(false);
-        setDownVotes(downVote-1);
-    }else{
-        setUpVoteActive(true);
-        setUpVotes(upVotes+1);
-        if(upVoteActive){
-            setDownVoteActive(false);
-            setUpVotes(upVotes+1);
-            setDownVotes(downVotes-1);
-        }
-    }
-  }
+  
   return (
     <div className="max-w-6xl mx-auto">
       <h1 className="6xl">{allPost.length}</h1>
@@ -72,14 +40,12 @@ const AllPost = () => {
                 <p>{post.tag}</p>
                 <div className="card-actions">
                   <div className="flex items-center">
-                    <button onClick={upVote} className="btn rounded-full">
+                    <button  className="btn rounded-full">
                       <FaArrowAltCircleUp></FaArrowAltCircleUp>
-                      {upVotes}
                     </button>
-                    <p className="btn"></p>
-                    <button onClick={downVote} className="btn rounded-full">
+                    <p className="btn">{post.upVote-post.downVote}</p>
+                    <button className="btn rounded-full">
                       <FaArrowCircleDown></FaArrowCircleDown>
-                      {downVotes}
                     </button>
                   </div>
                   <Link

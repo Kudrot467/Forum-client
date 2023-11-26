@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const Login = () => {
@@ -11,9 +12,24 @@ const Login = () => {
     const [showPassword, setShowPassWord] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const from=location.state?.from?.pathname ||"/";
+    const axiosPublic=useAxiosPublic();
   
     const handleGoogleLog = () => {
-      googleSignIn().then().catch();
+      googleSignIn()
+      .then(result=>{
+        const userInfo={
+          email:result.user?.email,
+          name:result.user?.displayName,
+          image_url:result.user?.photoURL
+        }
+        axiosPublic.post('/users',userInfo)
+       .then(res=>{
+        console.log(res.data);
+        navigate('/')
+       })
+      })
+      .catch();
     };
   
     const handleLogin = (e) => {
@@ -24,8 +40,6 @@ const Login = () => {
       signIn(email, password)
         .then((result) => {
           console.log(result.user);
-  
-          navigate(location?.state ? location.state : "/");
           Swal.fire({
             position: "center",
             icon: "success",
@@ -33,6 +47,7 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1500
           });
+          navigate(from,{replace:true});
          form.reset();
         })
         .catch((error) => {
@@ -47,7 +62,7 @@ const Login = () => {
              <div className="hero min-h-screen">
       <div className="hero-content md:w-3/4 lg:w-1/2 flex-col md:flex-row">
       <div className="">
-            <img className="w-full rounded-t-lg" src="" alt="" />
+            <img className="w-full rounded-lg" src="" alt="" />
           <img
             className="w-full"
             src="https://i.ibb.co/ZK6xP04/Blue-and-White-Illustrated-Login-Page-Mobile-Prototype.png"
