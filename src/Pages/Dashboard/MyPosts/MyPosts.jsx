@@ -7,11 +7,40 @@ const MyPosts = () => {
   return (
     <div>
       <div className="max-w-6xl mx-auto ">
-        <h2 className="3xl">My posts{myPosts.length}</h2>
+        <h2 className="text-3xl text-[#C6A921] text-center font-semibold">--My posts--
+        <br />
+        {myPosts.length}</h2>
         <div>
-          {myPosts.map((myPost) => (
-            <div key={myPost._id}>
-              <div className="card bg-base-100 shadow-xl mt-20">
+          <div>
+            <div className="overflow-x-auto">
+              <table className="table table-zebra">
+                {/* head */}
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th className="text-2xl">Post title</th>
+                    <th className="text-2xl">Number Of Votes</th>
+                    <th className="text-2xl">comments</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {myPosts.map(myPost=><tr key={myPost._id}>
+                    <th></th>
+                    <td className="card-title text-[#C6A921] text-xl ml-3 font-semibold rounded-xl">{myPost.postTitle}</td>
+                    <td className="text-[#C6A921] text-xl font-semibold">{myPost.upVote-myPost.downVote}</td>
+                    <td><Link className="btn bg-[#C6A921] hover:bg-white hover:text-[#C6A921] text-white font-medium" to="/membership"><FaComment></FaComment>
+                  Comments
+                  </Link></td>
+                  <td>
+                  <button className="btn bg-red-600 text-white hover:bg-white hover:text-red-600">
+                        Delete</button>
+                  </td>
+                 
+                  </tr>)}
+                </tbody>
+              </table>
+            </div>
+            {/* <div className="card bg-base-100 shadow-xl mt-20">
                 <h2 className="card-title text-[#C6A921] text-xl ml-3 font-semibold rounded-xl">
                   {myPost.postTitle}
                 </h2>
@@ -27,9 +56,8 @@ const MyPosts = () => {
                         Delete</button>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </div> */}
+          </div>
         </div>
       </div>
     </div>

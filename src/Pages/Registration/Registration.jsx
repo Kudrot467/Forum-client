@@ -22,6 +22,7 @@ const Registration = () => {
     const image_url = data.image_url;
     const email = data.email;
     const password = data.password;
+    const role="user";
 
     const user = {
       userName,
@@ -29,6 +30,7 @@ const Registration = () => {
       email,
       password,
       medal,
+      role
     };
 
     axiosPublic.post("/users",(user))
