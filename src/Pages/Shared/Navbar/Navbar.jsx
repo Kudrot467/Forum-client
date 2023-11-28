@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { FaBell } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import useAnnouncement from "../../../Hooks/useAnnouncement";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [announcements]=useAnnouncement();
   const signOut = () => {
     logOut().then().catch();
   };
@@ -52,7 +54,7 @@ const Navbar = () => {
           }}
         >
           <NavLink to="/">
-            <span className="indicator-item badge badge-secondary">0+</span>
+            <span className="indicator-item badge badge-secondary">{announcements.length}</span>
             <FaBell></FaBell>
           </NavLink>{" "}
         </div>
