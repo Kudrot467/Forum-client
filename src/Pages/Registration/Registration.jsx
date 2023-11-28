@@ -13,6 +13,7 @@ const Registration = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const axiosPublic=useAxiosPublic();
@@ -38,6 +39,7 @@ const Registration = () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {
+          reset();
           Swal.fire("Thank You!", "Now you got a bronze medal !", "success");
         }
       });

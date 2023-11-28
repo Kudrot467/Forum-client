@@ -36,7 +36,7 @@ const AllPost = () => {
                 </div>
               </div>
               <div className="card-body">
-                <h2 className="card-title">{post.postTitle}</h2>
+                <h2 className="card-title h-[30px] ">{post.postTitle}</h2>
                 <p>{post.tag}</p>
                 <div className="card-actions">
                   <div className="flex items-center">
