@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import { FaBullhorn } from "react-icons/fa";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const MakeAnnouncements = () => {
 
     const { user } = useContext(AuthContext);
-    const axiosPublic=useAxiosPublic();
+    const axiosSecure=useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -26,7 +26,7 @@ const MakeAnnouncements = () => {
       email,
       announcementDescription
     }
-    axiosPublic.post("/makeAnnouncements", announcement).then((res) => {
+    axiosSecure.post("/makeAnnouncements", announcement).then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {
           Swal.fire("Congrats!", "Announcement done !", "success");

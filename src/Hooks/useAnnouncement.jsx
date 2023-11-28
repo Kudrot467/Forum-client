@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "./useAxiosPublic";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useAnnouncement = () => {
-    const axiosPublic=useAxiosPublic();
+    const axiosSecure=useAxiosSecure();
     const {data:announcements=[]}=useQuery({
          queryKey:['announcements'],
          queryFn:async()=>{
-             const res=await axiosPublic.get('/makeAnnouncements')
+             const res=await axiosSecure.get('/makeAnnouncements')
              return res.data;
          }
         });
