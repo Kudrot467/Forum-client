@@ -2,6 +2,7 @@ import {
   FaArrowAltCircleUp,
   FaArrowCircleDown,
   FaComment,
+  FaList,
 } from "react-icons/fa";
 import usePosts from "../../../Hooks/usePosts";
 import { Link } from "react-router-dom";
@@ -13,7 +14,7 @@ const AllPost = () => {
   
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="6xl">{allPost.length}</h1>
+      <h1  className="text-2xl text-[#C6A921] font-semibold underline flex items-center"> <FaList className="mr-3"></FaList>Posts</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {reversedPosts.map((post) => (
           <div key={post._id}>
