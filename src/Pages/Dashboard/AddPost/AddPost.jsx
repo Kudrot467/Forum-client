@@ -5,7 +5,8 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import usePost from "../../../Hooks/usePost";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const AddPost = () => {
   const { user } = useContext(AuthContext);
@@ -30,12 +31,34 @@ const AddPost = () => {
 
   console.log(currentDate);
 
+  const {data: tags=[]}=useQuery({
+    queryKey:['users'],
+    queryFn:async()=>{
+        const res=await axiosSecure.get('/tags');
+        return res.data
+    }
+});
+
   const tagOptions = [
     { value: "technology", label: "Technology" },
     { value: "programming", label: "Programming" },
     { value: "design", label: "Design" },
     { value: "entertainment", label: "Entertainment" },
   ];
+  console.log(tagOptions)
+  const tagOptions2=tags.map(tag=>{
+    const storedTag=tag.tag;
+    return[
+      {value:storedTag,label:storedTag},
+      { value: "technology", label: "Technology" },
+      { value: "programming", label: "Programming" },
+      { value: "design", label: "Design" },
+      { value: "entertainment", label: "Entertainment" },
+    ]
+
+  })
+  console.log(tagOptions2[0])
+  
   const axiosSecure = useAxiosSecure();
 
   const onSubmit = (data) => {
@@ -144,11 +167,19 @@ const AddPost = () => {
                         )}
                       </div>
                       <div className="border-2 border-[#C6A921]">
+                        {
+                          tags.length>0 ? <Select
+                          defaultValue={selectedOption}
+                          onChange={setSelectedOption}
+                          options={tagOptions2[0]} 
+                        />:
                         <Select
                           defaultValue={selectedOption}
                           onChange={setSelectedOption}
                           options={tagOptions}
                         />
+                        }
+                        
                       </div>
                     </div>
                     <div className="form-control mt-6">

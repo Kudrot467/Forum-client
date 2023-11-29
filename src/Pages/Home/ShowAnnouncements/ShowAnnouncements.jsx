@@ -6,10 +6,12 @@ const ShowAnnouncements = () => {
 
   return (
     <div className="max-w-6xl mx-auto my-10">
+      {announcements.length ===0 ? "" : <>
+      
       <h2 className="text-2xl text-[#C6A921] font-semibold underline flex items-center">
         <FaBullhorn></FaBullhorn> --*{announcements.length}*--
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {announcements.map((announcement) => (
           <div key={announcement._id}>
             <div className="card card-compact bg-base-200 shadow-xl">
@@ -28,10 +30,15 @@ const ShowAnnouncements = () => {
               </h2>
               <p className="h-[30px]">{announcement.announcementDescription}</p>
             </div>
-          </div>
+        </div>
         ))}
       </div>
-    </div>
+      </>
+     }
+      </div>
+        
+  
+     
   );
 };
 

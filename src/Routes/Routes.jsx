@@ -51,7 +51,7 @@ import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
             //admin routes
             {
                 path:'adminProfile',
-                element:<AdminProfile></AdminProfile>
+                element:<AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             },
 
             {
