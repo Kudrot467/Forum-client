@@ -15,7 +15,7 @@ const MyProfile = () => {
     console.log(recentThreePosts);
 
     useEffect(()=>{
-        axiosSecure(`/users?email=${user?.email}`)
+        axiosSecure.get(`/users?email=${user?.email}`)
         // .then(res=>res.json())
         .then(res=>setLoggedUser(res.data[0]));
     },[])

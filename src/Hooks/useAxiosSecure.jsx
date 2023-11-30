@@ -8,12 +8,12 @@ import { AuthContext } from "../Provider/AuthProvider";
 })
 const useAxiosSecure = () => {
 
-   const navigate=useNavigate();
+   const navigate =useNavigate();
    const {logOut}=useContext(AuthContext);
 
    axiosSecure.interceptors.request.use(function(config){
       const token=localStorage.getItem('access-token')
-      console.log(token)
+      //console.log(token)
      config.headers.authorization=`Bearer ${token}` ;   
       return config;
    },function(error){

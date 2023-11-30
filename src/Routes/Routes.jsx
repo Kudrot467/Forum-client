@@ -12,7 +12,9 @@ import MyPosts from "../Pages/Dashboard/MyPosts/MyPosts";
 import Users from "../Pages/Dashboard/Users/Users";
 import MakeAnnouncements from "../Pages/Dashboard/MakeAnnouncement/MakeAnnouncements";
 import AdminRoute from "./AdminRoute";
+import PrivateRoute from"./PrivateRoute";
 import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
+import PostDetails from "../Pages/Home/PostDetails/PostDetails";
  export const router = createBrowserRouter([
     {
       path: "/",
@@ -29,6 +31,10 @@ import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
         {
             path:'/registration',
             element:<Registration></Registration>
+        },
+        {
+            path:'/postDetails/:id',
+            element:<PostDetails></PostDetails>
         }
       ]
     },
@@ -38,7 +44,7 @@ import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
         children:[
             {
                 path:'myProfile',
-                element:<MyProfile></MyProfile>
+                element:<PrivateRoute><MyProfile></MyProfile></PrivateRoute>
             },
             {
                 path:'addPost',
