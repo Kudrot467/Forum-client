@@ -17,6 +17,8 @@ import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
 import PostDetails from "../Pages/Home/PostDetails/PostDetails";
 import Comments from "../Pages/Home/Comments/Comments";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
  export const router = createBrowserRouter([
     {
       path: "/",
@@ -53,6 +55,11 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
         element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children:[
             {
+                path:'userHome',
+                element:<UserHome></UserHome>
+            }
+            ,
+            {
                 path:'myProfile',
                 element:<PrivateRoute><MyProfile></MyProfile></PrivateRoute>
             },
@@ -65,6 +72,10 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
                 element:<PrivateRoute><MyPosts></MyPosts></PrivateRoute>
             },
             //admin routes
+            {
+                path:'adminHome',
+                element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+            },
             {
                 path:'adminProfile',
                 element:<AdminRoute><AdminProfile></AdminProfile></AdminRoute>

@@ -3,10 +3,12 @@ import { FaBell } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAnnouncement from "../../../Hooks/useAnnouncement";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [announcements]=useAnnouncement();
+  const [isAdmin]=useAdmin();
   const signOut = () => {
     logOut().then().catch();
   };
@@ -59,6 +61,40 @@ const Navbar = () => {
           </NavLink>{" "}
         </div>
       </li>
+      {
+        user && isAdmin &&  <li className="mr-2">
+        {" "}
+        <div
+          style={{
+            backgroundColor: "#C6A921",
+            fontSize: "20px",
+            fontWeight: "600",
+            color: "white",
+          }}
+        >
+          <NavLink to="/dashboard/adminHome">
+           Dashboard
+          </NavLink>{" "}
+        </div>
+      </li>
+      }
+      {
+        user && !isAdmin &&  <li className="mr-2">
+        {" "}
+        <div
+          style={{
+            backgroundColor: "#C6A921",
+            fontSize: "20px",
+            fontWeight: "600",
+            color: "white",
+          }}
+        >
+          <NavLink to="/dashboard/userHome">
+           Dashboard
+          </NavLink>{" "}
+        </div>
+      </li>
+      }
     </>
   );
 
