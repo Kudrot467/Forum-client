@@ -43,10 +43,6 @@ import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
         {
             path:'/comments/:id',
             element:<PrivateRoute><Comments></Comments></PrivateRoute>
-        },
-        {
-            path:'/membership',
-            element:<Payment></Payment>
         }
       ]
     },
@@ -70,6 +66,10 @@ import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
             {
                 path:'myPosts',
                 element:<PrivateRoute><MyPosts></MyPosts></PrivateRoute>
+            },
+            {
+                path:'membership',
+                element:<Payment></Payment>
             },
             //admin routes
             {
