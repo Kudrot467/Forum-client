@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { FaBell } from "react-icons/fa";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAnnouncement from "../../../Hooks/useAnnouncement";
 import useAdmin from "../../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const [announcements]=useAnnouncement();
-  const [isAdmin]=useAdmin();
+  const [announcements] = useAnnouncement();
+  const [isAdmin] = useAdmin();
   const signOut = () => {
     logOut().then().catch();
   };
@@ -56,45 +56,13 @@ const Navbar = () => {
           }}
         >
           <NavLink to="/">
-            <span className="indicator-item badge badge-secondary">{announcements.length}</span>
+            <span className="indicator-item badge badge-secondary">
+              {announcements.length}
+            </span>
             <FaBell></FaBell>
           </NavLink>{" "}
         </div>
       </li>
-      {
-        user && isAdmin &&  <li className="mr-2">
-        {" "}
-        <div
-          style={{
-            backgroundColor: "#C6A921",
-            fontSize: "20px",
-            fontWeight: "600",
-            color: "white",
-          }}
-        >
-          <NavLink to="/dashboard/adminHome">
-           Dashboard
-          </NavLink>{" "}
-        </div>
-      </li>
-      }
-      {
-        user && !isAdmin &&  <li className="mr-2">
-        {" "}
-        <div
-          style={{
-            backgroundColor: "#C6A921",
-            fontSize: "20px",
-            fontWeight: "600",
-            color: "white",
-          }}
-        >
-          <NavLink to="/dashboard/userHome">
-           Dashboard
-          </NavLink>{" "}
-        </div>
-      </li>
-      }
     </>
   );
 
@@ -144,10 +112,7 @@ const Navbar = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img
-                    alt=""
-                    src={user?.photoURL}
-                  />
+                  <img alt="" src={user?.photoURL} />
                 </div>
               </label>
               <ul
@@ -161,8 +126,37 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li className="text-lg mb-2 bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
-                        <Link to="/dashboard">--Dashboard--</Link>
-                      </li>
+                  {user && isAdmin && (
+                    <li className="mr-2">
+                      {" "}
+                      <div
+                        style={{
+                          backgroundColor: "#C6A921",
+                          fontSize: "20px",
+                          fontWeight: "600",
+                          color: "white",
+                        }}
+                      >
+                        <NavLink to="/dashboard/adminHome">--Dashboard--</NavLink>{" "}
+                      </div>
+                    </li>
+                  )}
+                  {user && !isAdmin && (
+                    <li className="mr-2">
+                      {" "}
+                      <div
+                        style={{
+                          backgroundColor: "#C6A921",
+                          fontSize: "20px",
+                          fontWeight: "600",
+                          color: "white",
+                        }}
+                      >
+                        <NavLink to="/dashboard/userHome">Dashboard</NavLink>{" "}
+                      </div>
+                    </li>
+                  )}
+                </li>
                 <li className="w-full">
                   <button
                     onClick={signOut}

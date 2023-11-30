@@ -59,17 +59,6 @@ const AuthProvider = ({children}) => {
                     localStorage.removeItem('access-token');
                     setLoading(false)
                 }
-                // {
-                //     axios.post('',loggedUser, {withCredentials:true})
-                //     .then(res=>{
-                //         console.log("token",res.data);
-                //     })
-                // }else{
-                //     axios.post('',loggedUser,{withCredentials:true})
-                //     .then(res=>{
-                //         console.log(res.data)
-                //     })
-                // }
         })
         return ()=>{
             unsubscribe();
