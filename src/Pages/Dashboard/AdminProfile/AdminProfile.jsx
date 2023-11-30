@@ -7,11 +7,13 @@ import useUsers from "../../../Hooks/useUsers";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useComments from "../../../Hooks/useComments";
 
 const AdminProfile = () => {
     const {user}=useContext(AuthContext);
     const [selectedOption, setSelectedOption] = useState(null);
     const[allPost]=usePosts();
+    const [comments]=useComments();
     const [users]=useUsers();
     const {
         handleSubmit,
@@ -86,7 +88,7 @@ const AdminProfile = () => {
                 <tbody>
                    <tr>
                    <th></th>
-                    <td className="text-[#C6A921] text-xl font-semibold rounded-xl"></td>
+                    <td className="text-[#C6A921] text-xl font-semibold rounded-xl">{comments.length}</td>
                     <td className="text-[#C6A921] text-xl text-center font-semibold">{allPost.length}</td>
                    <td className="text-[#C6A921] text-xl text-center font-semibold">
                     {users.length}

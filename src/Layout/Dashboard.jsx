@@ -93,6 +93,7 @@ const Dashboard = () => {
           </li>
 
             </>:
+            //users dashboard links
             <>
                 <li >
             <NavLink
@@ -153,7 +154,27 @@ const Dashboard = () => {
           </li>
           <hr />
           <hr />
-          
+          <li>
+            <NavLink
+              to="/dashboard/membership"
+              className=""
+              style={({isActive})=>{
+               return{
+                backgroundColor: isActive ? "white":"",
+                fontSize:isActive ? "20px":"22px",
+                fontWeight: isActive ?"700":"600",
+                color:isActive ? "#C6A921":"white",
+                marginBottom:isActive ?"12px":"12px",
+               }
+
+              }}
+            >
+                <FaList></FaList>
+             Member Ship
+            </NavLink>
+          </li>
+          <hr />
+          <hr />
             </>
           }
           <hr />

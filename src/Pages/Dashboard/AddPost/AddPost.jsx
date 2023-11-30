@@ -109,7 +109,7 @@ const AddPost = () => {
           <>
             <Link
               className="btn bg-[#C6A921] hover:bg-white hover:text-[#C6A921] text-white font-medium"
-              to="/membership"
+              to="/dashboard/membership"
             >
               Become a Member
             </Link>

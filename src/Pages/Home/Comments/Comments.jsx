@@ -91,9 +91,6 @@ console.log(selectedOption)
                           onChange={setSelectedOption}
                           options={tagOptions}
                         />
-                     <button className="w-full text-white font-semibold text-xl hover:bg-[#C6A921] bg-[#C6A921]">
-                       Feedback
-                      </button>   
                     </td>
                    <td className="text-[#C6A921] text-xl font-semibold">
                     <button>

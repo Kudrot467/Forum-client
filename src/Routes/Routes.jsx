@@ -16,6 +16,7 @@ import PrivateRoute from"./PrivateRoute";
 import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
 import PostDetails from "../Pages/Home/PostDetails/PostDetails";
 import Comments from "../Pages/Home/Comments/Comments";
+import Payment from "../Pages/Dashboard/Payment/Payment";
  export const router = createBrowserRouter([
     {
       path: "/",
@@ -39,13 +40,17 @@ import Comments from "../Pages/Home/Comments/Comments";
         },
         {
             path:'/comments/:id',
-            element:<Comments></Comments>
+            element:<PrivateRoute><Comments></Comments></PrivateRoute>
+        },
+        {
+            path:'/membership',
+            element:<Payment></Payment>
         }
       ]
     },
      {
         path:'/dashboard',
-        element:<Dashboard></Dashboard>,
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children:[
             {
                 path:'myProfile',
@@ -53,11 +58,11 @@ import Comments from "../Pages/Home/Comments/Comments";
             },
             {
                 path:'addPost',
-                element:<AddPost></AddPost>
+                element:<PrivateRoute><AddPost></AddPost></PrivateRoute>
             },
             {
                 path:'myPosts',
-                element:<MyPosts></MyPosts>
+                element:<PrivateRoute><MyPosts></MyPosts></PrivateRoute>
             },
             //admin routes
             {

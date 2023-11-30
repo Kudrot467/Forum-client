@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query"
 import useAxiosSecure from "./useAxiosSecure";
 
 const useComments = () => {
@@ -10,7 +10,9 @@ const useComments = () => {
         return res.data
     }
 });
-return[comments,refetch]
+
+
+  return [comments,refetch];
 };
 
 export default useComments;

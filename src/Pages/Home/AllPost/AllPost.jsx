@@ -10,9 +10,10 @@ import useComments from "../../../Hooks/useComments";
 
 const AllPost = () => {
   const [allPost] = usePosts();
-  const[comments]=useComments();
+const [comments]=useComments();
+console.log(comments)
   const reversedPosts = allPost.slice().reverse();
-    console.log(reversedPosts);
+   
   
   return (
     <div className="max-w-6xl mx-auto">
@@ -56,12 +57,8 @@ const AllPost = () => {
                   className="btn bg-[#C6A921] hover:bg-white hover:text-[#C6A921] text-white font-medium"
                   to="/"
                 >
-                  {
-                    comments.find((comment) => comment.postId == post._id)
-                     
-                  }
                   <FaComment></FaComment>
-                  Comments
+                  Comments(0)
                 </Link>
               </div>
             </div>
