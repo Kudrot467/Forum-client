@@ -6,9 +6,11 @@ import {
 } from "react-icons/fa";
 import usePosts from "../../../Hooks/usePosts";
 import { Link } from "react-router-dom";
+import useComments from "../../../Hooks/useComments";
 
 const AllPost = () => {
   const [allPost] = usePosts();
+  const[comments]=useComments();
   const reversedPosts = allPost.slice().reverse();
     console.log(reversedPosts);
   
@@ -54,6 +56,10 @@ const AllPost = () => {
                   className="btn bg-[#C6A921] hover:bg-white hover:text-[#C6A921] text-white font-medium"
                   to="/"
                 >
+                  {
+                    comments.find((comment) => comment.postId == post._id)
+                     
+                  }
                   <FaComment></FaComment>
                   Comments
                 </Link>

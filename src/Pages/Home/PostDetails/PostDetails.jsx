@@ -50,7 +50,7 @@ const PostDetails = () => {
               <div >
               <Link
                 className="btn bg-[#C6A921] mr-2 hover:bg-white hover:text-[#C6A921] text-white font-medium"
-                to="/"
+                to={`/comments/${detail._id}`}
               >
                 <FaComment></FaComment>
                 Comments

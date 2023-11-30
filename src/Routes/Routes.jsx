@@ -15,6 +15,7 @@ import AdminRoute from "./AdminRoute";
 import PrivateRoute from"./PrivateRoute";
 import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
 import PostDetails from "../Pages/Home/PostDetails/PostDetails";
+import Comments from "../Pages/Home/Comments/Comments";
  export const router = createBrowserRouter([
     {
       path: "/",
@@ -35,6 +36,10 @@ import PostDetails from "../Pages/Home/PostDetails/PostDetails";
         {
             path:'/postDetails/:id',
             element:<PostDetails></PostDetails>
+        },
+        {
+            path:'/comments/:id',
+            element:<Comments></Comments>
         }
       ]
     },
