@@ -1,4 +1,8 @@
+
 # Threads Studio
+<strong>
+This is not complete yet
+</strong>
 ## Features:
 *Fully Responsive
 *admin features added
