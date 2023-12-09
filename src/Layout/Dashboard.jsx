@@ -1,18 +1,20 @@
 import { FaAd, FaBullhorn, FaHome, FaList, FaReply, FaUser, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import useAdmin from "../Hooks/useAdmin";
-
+import useUsers from "../Hooks/useUsers";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 const Dashboard = () => {
 
-  const[isAdmin]=useAdmin();
-
+  const{user}=useContext(AuthContext);
+  const [users]=useUsers();
+  const loggedInUser=users.find(User=>User.email===user?.email);
   return (
     <div className="flex">
         
       <div className="w-64 min-h-screen bg-[#C6A921]">
         <ul className="menu">
           {
-            isAdmin ? <>
+            loggedInUser?.role==='admin' ? <>
              <li >
             <NavLink
               to="/dashboard/adminProfile"
@@ -91,6 +93,67 @@ const Dashboard = () => {
              Make Announcement
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/dashboard/addPost"
+              style={({isActive})=>{
+                return{
+                 backgroundColor: isActive ? "white":"",
+                 fontSize:isActive ? "20px":"22px",
+                 fontWeight: isActive ?"700":"600",
+                 color:isActive ? "#C6A921":"white",
+                 marginBottom:isActive ?"12px":"12px",
+                }
+ 
+               }}
+            >
+                <FaAd></FaAd>
+             Add Post--
+            </NavLink>
+          </li>
+          <hr /><hr />
+          <li>
+            <NavLink
+              to="/dashboard/myPosts"
+              className=""
+              style={({isActive})=>{
+               return{
+                backgroundColor: isActive ? "white":"",
+                fontSize:isActive ? "20px":"22px",
+                fontWeight: isActive ?"700":"600",
+                color:isActive ? "#C6A921":"white",
+                marginBottom:isActive ?"12px":"12px",
+               }
+
+              }}
+            >
+                <FaList></FaList>
+             My Posts--
+            </NavLink>
+          </li>
+          <hr />
+          <hr />
+          <li>
+            <NavLink
+              to="/dashboard/membership"
+              className=""
+              style={({isActive})=>{
+               return{
+                backgroundColor: isActive ? "white":"",
+                fontSize:isActive ? "20px":"22px",
+                fontWeight: isActive ?"700":"600",
+                color:isActive ? "#C6A921":"white",
+                marginBottom:isActive ?"12px":"12px",
+               }
+
+              }}
+            >
+                <FaList></FaList>
+             Member Ship
+            </NavLink>
+          </li>
+          <hr />
+          <hr />
 
             </>:
             //users dashboard links

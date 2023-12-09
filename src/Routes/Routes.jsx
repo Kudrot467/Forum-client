@@ -11,7 +11,6 @@ import AddPost from "../Pages/Dashboard/AddPost/AddPost";
 import MyPosts from "../Pages/Dashboard/MyPosts/MyPosts";
 import Users from "../Pages/Dashboard/Users/Users";
 import MakeAnnouncements from "../Pages/Dashboard/MakeAnnouncement/MakeAnnouncements";
-import AdminRoute from "./AdminRoute";
 import PrivateRoute from"./PrivateRoute";
 import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
 import PostDetails from "../Pages/Home/PostDetails/PostDetails";
@@ -76,21 +75,21 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
             //admin routes
             {
                 path:'adminHome',
-                element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+                element:<AdminHome></AdminHome>
             },
             {
                 path:'adminProfile',
-                element:<AdminRoute><AdminProfile></AdminProfile></AdminRoute>
+                element:<AdminProfile></AdminProfile>
             },
 
             {
                 path:'makeAnnouncements',
-                element:<AdminRoute><MakeAnnouncements></MakeAnnouncements></AdminRoute>
+                element:<MakeAnnouncements></MakeAnnouncements>
             },
 
             {
                 path:'manageUsers',
-                element:<AdminRoute><Users></Users></AdminRoute>
+                element:<Users></Users>
             }
         ]
     }

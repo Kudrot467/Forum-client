@@ -3,15 +3,20 @@ import { FaBell } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAnnouncement from "../../../Hooks/useAnnouncement";
-import useAdmin from "../../../Hooks/useAdmin";
+import useUsers from "../../../Hooks/useUsers";
+
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [announcements] = useAnnouncement();
-  const [isAdmin] = useAdmin();
+  const [users]=useUsers();
+  // const [isAdmin] = useAdmin();
   const signOut = () => {
     logOut().then().catch();
   };
+
+  const loggedInUser=users.find(User=>User.email===user?.email);
+
   const navLinks = (
     <>
       <li className="mr-2">
@@ -126,7 +131,7 @@ const Navbar = () => {
                   </a>
                 </li>
                 <li className="text-lg mb-2 bg-[#C6A921] hover:bg-[#C6A921] text-white text-center">
-                  {user && isAdmin && (
+                  {loggedInUser?.role==='admin' && (
                     <li className="mr-2">
                       {" "}
                       <div
@@ -141,7 +146,7 @@ const Navbar = () => {
                       </div>
                     </li>
                   )}
-                  {user && !isAdmin && (
+                  {loggedInUser?.role==='user' &&(
                     <li className="mr-2">
                       {" "}
                       <div
